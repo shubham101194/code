@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+#include<stdio.h>
+
+using namespace std;
+
+string pure(int n)
+{
+    if(n==1)
+        return "44";
+    else if(n==2)
+        return "55";
+    else{
+    int sum=0,i=0;
+    string temp;
+    while(n > sum)
+    {
+        sum += pow(2,i+1);
+        i++;
+    }
+    int j = i-1;
+    int k = j-1;
+    int d = pow(2,j);
+    int e = pow(2,k);
+    int a = n - (sum-pow(2,i));
+    int b = a / d;
+    int c = a % d;
+    if(b==0 || a==d)
+        temp = "4";
+    else
+        temp = "5";
+    
+    if(c==0)
+        return temp + pure((2*d)-2) + temp;
+    else
+        return temp + pure(d+c-2) + temp;
+    }
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        cout << pure(n) << endl;
+    }
+}
