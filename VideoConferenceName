@@ -1,0 +1,67 @@
+vector<string> solve(vector<string> names) {
+    map<string, int> mp1;
+    map<string, int> mp2;
+    vector<string> result;
+
+    for(int i=0;i<names.size();i++)
+    {
+        string name = names[i];
+
+        if(mp1[names[i]]!=0)
+        {
+            string temp = name + " " + to_string(mp1[name]+1);
+            result.push_back(temp); 
+            mp1[name]++;   
+        }
+        else
+        {  
+            mp1[name]++;          
+            string temp="";
+            string ans;
+            bool found = false;
+
+            for(int j=0;j<name.length();j++)
+            {
+                temp += name[j];
+                if(mp2[temp] == 0 && found == false)
+                {
+                    ans = temp;
+                    found = true;
+                }
+                mp2[temp]++;
+            }
+            if(found)
+                result.push_back(ans);
+            else
+                result.push_back(names[i]);            
+        }
+    }
+
+    return result;
+}
+
+?* Test Cases - 
+3
+alvin
+alice
+alvin
+--------------
+a
+ali
+alvin 2
+
+6
+mary
+stacy
+sam
+samuel
+sam
+miguel
+-----------------
+m
+s
+sa
+samu
+sam 2
+mi
+
